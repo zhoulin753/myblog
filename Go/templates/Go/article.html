@@ -1,0 +1,131 @@
+{% extends 'Go/blog.html' %}
+{% block ul %}
+    <div class="right_div col-lg-8 div25">
+        <div class="media">
+            <div class="media-body h4_color">
+                <div class="media-heading div24">{{ article_describe.title }}</div>
+                <h4 class="h41">{{ article_describe.article.article }}</h4>
+                <a href="{{ article_describe }}/article/{{ article_describe.pk }}"
+                   class="a1" style="display: none">{{ i.article_describe }}</a>
+                <div class="div16">
+                    {#                    <span style="display: none"><a href="blog/{{ i.user.username }}">{{ i.user.username }}</a></span>#}
+                    <span>发布于：{{ article_describe.create_time }}</span>
+                    <span class="" role="button" data-toggle="collapse"
+                                   href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">评论数：{{ article_describe.comment_count }}</span>
+                    <span class="glyphicon glyphicon-thumbs-up up_span vote" data-toggle="modal"
+                    > 赞({{ article_describe.up_count }})  </span>
+                    <span class="glyphicon glyphicon-thumbs-down down_span vote" data-toggle="modal"
+                    >踩({{ article_describe.down_count }}) </span>
+                    <hr class="hr1">
+{#                    <div>平论区:{{ article_commet.count }}</div>#}
+                    <ul class="list-group ul19">
+                        {#                        {% for i in ariticle_comment %}#}
+                        {#                        <li class="list-group-item">#}
+                        {#                            <a href="blog/{{ i.user.username }}"><img class="img_avatar" src="/{{ i.user.avatar }}" alt=""></a>#}
+                        {#                            <span ><a href="blog/{{ i.user.username }}">{{ i.user.username }}</a></span>#}
+                        {#                            <span>{{ i.create_time | date:"Y-m-d H:i:s" }}</span>#}
+                        {#                            <a href="#textarea" class="pull-right">评论</a>#}
+                        {#                            <span class="pull-right">点赞</span>#}
+                        {#                            <span class="pull-right">踩 </span>#}
+                        {#                            <hr class="hr1">#}
+                        {#                            <span>{{ i.content }}</span>#}
+                        {#                        </li>#}
+                        {#                        {% endfor %}#}
+                        <div class="bs-example">
+                            <p>
+                                <a class="btn btn-primary collapsed" role="button" data-toggle="collapse"
+                                   href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    展开评论
+                                </a>
+{#                                <button class="btn btn-primary collapsed" type="button" data-toggle="collapse"#}
+{#                                        data-target="#collapseExample" aria-expanded="false"#}
+{#                                        aria-controls="collapseExample">#}
+{#                                    Button with data-target#}
+{#                                </button>#}
+                            </p>
+                            <div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0;">
+                                <div class="well">
+                                    {% for i in ariticle_comment %}
+                                        <li class="list-group-item">
+                                            <a href="blog/{{ i.user.username }}"><img class="img_avatar"
+                                                                                      src="/{{ i.user.avatar }}" alt=""></a>
+                                            <span><a href="blog/{{ i.user.username }}">{{ i.user.username }}</a></span>
+                                            <span>{{ i.create_time | date:"Y-m-d H:i:s" }}</span>
+                                            <a href="#textarea" class="pull-right">评论</a>
+                                            <span class="pull-right">点赞</span>
+                                            <span class="pull-right">踩 </span>
+                                            <hr class="hr1">
+                                            <span>{{ i.content }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+
+                    <hr class="hr1">
+
+
+                    <div>
+                        <div class="col-lg-7">
+                            <div class="input-group">
+
+                                <textarea class="form-control text1"
+                                          aria-label="Text input with dropdown button"
+                                          placeholder="输入你要评论的内容：" id="textarea"></textarea>
+                                <div class="btn-group">
+                                    <div class="bs-example bs-example-padded-bottom">
+                                        <button type="button" class="btn btn-lg btn-danger bs-docs-popover button2"
+                                                data-toggle="popover" title=""
+                                                data-content="And here's some amazing content. It's very engaging. Right?"
+                                                data-original-title="Popover title">
+                                            发送
+                                        </button>
+                                        <div class="popover fade right in div26" role="tooltip" id="popover721617"
+                                             style="top: 8px; left: 81.703px; display: none;width: 200px">
+                                            <div class="arrow" style="top: 50%;"></div>
+                                            <h3 class="popover-title">注意</h3>
+                                            <div class="popover-content">内容不可为空
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {#                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bs-example">
+        <p>
+            <a class="btn btn-primary collapsed" role="button" data-toggle="collapse" href="#collapseExample"
+               aria-expanded="false" aria-controls="collapseExample">
+                Link with href
+            </a>
+            <button class="btn btn-primary collapsed" type="button" data-toggle="collapse"
+                    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Button with data-target
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample" aria-expanded="false" style="height: 0;">
+            <div class="well">
+                {% for i in ariticle_comment %}
+                    <li class="list-group-item">
+                        <a href="blog/{{ i.user.username }}"><img class="img_avatar" src="/{{ i.user.avatar }}" alt=""></a>
+                        <span><a href="blog/{{ i.user.username }}">{{ i.user.username }}</a></span>
+                        <span>{{ i.create_time | date:"Y-m-d H:i:s" }}</span>
+                        <a href="#textarea" class="pull-right">评论</a>
+                        <span class="pull-right">点赞</span>
+                        <span class="pull-right">踩 </span>
+                        <hr class="hr1">
+                        <span>{{ i.content }}</span>
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock ul %}

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ uname }}</title>
+    <link rel="icon" href="static/img/title.png">
+    <script src="../../static/js/jquery-3.3.1.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/css.css">
+    <script src="../../static/js/js.js"></script>
+
+</head>
+<body style="margin-top: 0!important;">
+{% csrf_token %}
+{% block header %}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img class="title_img" src="../../static/img/title.png" alt=""></a>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">ALL <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Linux</a></li>
+                    <li><a href="#">python</a></li>
+                    <li><a href="#">OpenStack</a></li>
+                    <li><a href="#">GoLang</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="/">欢迎：{{ request.user.username }}</a></li>
+                        <li><a href="/write">写博客</a></li>
+                        <li><a href="/me">我</a></li>
+                        <li><a href="/logout">注销</a></li>
+                        <li><a href=''>修改密码</a></li>
+                    {% else %}
+                        <li><a href='/enter/'>登录</a></li>
+                        <li><a href="/enroll/">注册</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock header %}
+
+{% block body %}
+    <div class="div17">
+        <img class="img4" src="static/img/header.jpg" alt="">
+    </div>
+
+    <div class="container">
+        <div class="rom col-sm-12 ">
+
+            <div class="div11">
+                <div class="panel panel-default col-sm-12  div2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">分类</h3>
+                    </div>
+                    <div class="panel-body">
+                        1
+                    </div>
+                    <div class="panel-body">
+                        2
+                    </div>
+                    <div class="panel-body">
+                        3
+                    </div>
+                </div>
+
+                <div class="panel panel-info col-sm-12 div2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        1
+                    </div>
+                    <div class="panel-body">
+                        2
+                    </div>
+                    <div class="panel-body">
+                        3
+                    </div>
+                </div>
+
+                <div class="panel panel-success col-sm-12 div2">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        1
+                    </div>
+                    <div class="panel-body">
+                        2
+                    </div>
+                    <div class="panel-body">
+                        3
+                    </div>
+                </div>
+            </div>
+
+            <ul class="div10">
+                {% for i in artivle_list %}
+                    <li>
+                        <div class="media">
+                            <div class="media-left">
+                                <a class="a3" href="blog/{{ i.user.username }}">
+                                    <img class="media-object img_avatar" data-src="holder.js/64x64" alt="64x64"
+                                         src="{{ i.user.avatar }}"
+                                         data-holder-rendered="true">
+                                </a>
+                            </div>
+                            <div class="media-body h4_color">
+                                <h4 class="media-heading h5_color"><a href="{{ i.user.username }}/article/{{ i.pk }}"
+                                                                      class="a2">{{ i.title }}</a></h4>
+                                <a href="{{ i.user.username }}/article/{{ i.pk }}"
+                                   class="a1">{{ i.article_describe }}</a>
+                                <div class="div16">
+                                    <span><a href="/blog/{{ i.user.username }}">{{ i.user.username }}</a></span>
+                                    <span>发布于：{{ i.create_time }}</span>
+                                    <span>阅读数：66</span>
+                                    <span>评论数：{{ i.comment_count }}</span>
+                                    <span class="glyphicon glyphicon-thumbs-up up_span vote" data-toggle="modal"
+                                    >赞({{ i.up_count }})</span>
+
+                                    <span class="glyphicon glyphicon-thumbs-down down_span vote" data-toggle="modal"
+                                    >踩({{ i.down_count }})</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>
+                {% endfor %}
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li class="previous li1"><a href="#" class="a9"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="next li1"><a href="#" class="a9">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </ul>
+            {% block left %}
+                <div class="div18">
+                    <div id="carousel-example-generic" class="carousel slide div19" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img data-src="holder.js/900x500/auto/#777:#555/text:First slide"
+                                     alt="First slide [900x500]"
+                                     src="static/img/first.jpg"
+                                     data-holder-rendered="true">
+                            </div>
+                            <div class="item">
+                                <img data-src="holder.js/900x500/auto/#666:#444/text:Second slide"
+                                     alt="Second slide [900x500]"
+                                     src="static/img/second.jpg"
+                                     data-holder-rendered="true">
+                            </div>
+                            <div class="item">
+                                <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide"
+                                     alt="Third slide [900x500]"
+                                     src="static/img/third.png"
+                                     data-holder-rendered="true">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                           data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                           data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bs-example div20" data-example-id="simple-nav-stacked">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                        <li role="presentation" class="active li10"><a  class="li10">全部</a></li>
+                        {% for a in category_list %}
+                        <li role="presentation">
+                            <a title="{{ a.language }}" class="list-group-item classa">
+                                {{ a.language }}
+                                    <span class="badge">
+                                        {{ a.articledescribe_set.count }}
+                                    </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            {% endblock left %}
+
+
+        </div>
+    </div>
+
+
+{% endblock body %}
+{% block modal %}
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    {#                                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>#}
+                </div>
+                <div class="modal-body">
+                    <h4>你还没没有登录，是否帮你跳转到登录页面？</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">算了
+                    </button>
+                    <a href="/enter">
+                        <button type="button" class="btn btn-primary button1">好
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock modal %}
+{% block bottom %}
+    <div class='enter_enroll' style="display: none" title="{{ request.user }}">{{ request.user.is_authenticated }}</div>
+    <div class="bottom">
+        <table>
+            <tr>
+                <td>
+                    <ul class="ul17">
+                        <li>
+                            <div class="bottom_head"><h4>友情链接</h4></div>
+                            <hr class="hr20">
+                        </li>
+                        <li>
+                            <div class="div28">jave</div>
+                            <div class="div28">python</div>
+                            <div class="div28">liunx</div>
+                            <div class="div28">c#</div>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul class="ul18">
+                        <li>
+                            <div class="bottom_head"><h4>联系方式</h4></div>
+                            <hr class=" hr20">
+                        </li>
+                        <li>
+                            <div class="div29"><img src="../../static/img/35_013_ce.png" alt="" class="img11 img7">
+                            </div>
+                            <div class="div29"><img src="../../static/img/35_013_ce.png" alt="" class="img11 img8">
+                            </div>
+                            <div class="div29"><img src="../../static/img/35_013_ce.png" alt="" class="img11 img9">
+                            </div>
+                            <div class="div29"><img src="../../static/img/35_013_ce.png" alt="" class="img11 img10">
+                            </div>
+                        </li>
+                    </ul>
+
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <div class="bottom1">
+        <div class="col-sm-12">
+            <span>Copyright © </span> |
+            <span><a href="http://www.miibeian.gov.cn/" target="_blank" style="color:#555">还没有备案</a></span>
+        </div>
+    </div>
+
+
+{% endblock bottom %}
+
+</body>
+<script>
+    $div16 = $('.div16');
+    {% if request.user.is_authenticated %}
+
+        var send_ajax = function ($element, what, zh, str, user, article) {
+            var $formdata = new FormData();
+
+            $formdata.append('what', what);
+            $formdata.append('username', user);
+            $formdata.append('article_id', article);
+            $formdata.append('str', str);
+            $.ajax({
+                url: '/up_down/',
+                type: 'post',
+                data: $formdata,
+                processData: false,
+                contentType: false,
+                headers: {'x-CSRFToken': $.cookie('csrftoken')},
+                success: function (data) {
+                    var b = data['str'].match(/\(([^)]*)/i);
+                    if (data['what'] === 'first') {
+                        var c = parseInt(b[1]) + 1;
+                        var str7 = zh + '(' + c + ')';
+                        $element.html(str7).css({color: 'blue'})
+                    }
+                    else if (data['what'] === 'two') {
+                        var d = parseInt(b[1]) - 1;
+                        var str = zh + '(' + d + ')';
+                        $element.html(str).css({color: ''})
+                    }
+                    else if (data['what'] === 'third') {
+                        if (what === 'up') {
+                            var e = parseInt(b[1]) + 1;
+                            var str2 = zh + '(' + e + ')',
+                                str_down1 = $element.next().html();
+                            var fh = str_down1.match(/\(([^)]*)/i)[1],
+                                gh = parseInt(fh) - 1;
+                            str_new_down1 = '踩' + '(' + gh + ')';
+                            $element.html(str2).css({color: 'blue'}).next().css({color: ''}).html(str_new_down1)
+                        }
+                        else if (what === 'down') {
+                            var i = parseInt(b[1]) + 1;
+                            var str3 = zh + '(' + i + ')',
+                                str_down3 = $element.prev().html();
+                            var fj = str_down3.match(/\(([^)]*)/i)[1],
+                                gj = parseInt(fj) - 1;
+                            str_new_down3 = '赞' + '(' + gj + ')';
+                            $element.html(str3).css({color: 'blue'}).prev().css({color: ''}).html(str_new_down3)
+                        }
+                    }
+                }
+            })
+        };
+
+        $div16.on('click', '.vote', function () {
+            var $element = $(this),
+                str = $(this).html(),
+                ret = /^赞\(\d+\)$/,
+                ret_down = /^踩\(\d+\)$/,
+                user = '{{ request.user.username }}',
+                article = $(this).parent().siblings('a').attr('href').split('/')[2];
+            if (ret.test(str)) {
+                send_ajax($element, 'up', '赞', str, user, article)
+            }
+            else if (ret_down.test(str)) {
+                send_ajax($element, 'down', '踩', str, user, article)
+            }
+        });
+    {% else %}
+
+        $div16.on('click', '.vote', function () {
+            $(this).attr('data-target', '#myModal');
+            {#$('.button1').click(function () {#}
+            {#    var $formdata = new FormData();#}
+            {##}
+            {#var url = window.location.href;#}
+            {#alert(url);#}
+            {#$formdata.append('url', url);#}
+            {#$.ajax({#}
+            {#    url: '/save_url/',#}
+            {#    data: $formdata,#}
+            {#    type: 'post',#}
+            {#    headers: {'x-CSRFToken': $.cookie('csrftoken')},#}
+            {#    contentType: false,#}
+            {#    processData: false,#}
+            {#    success: function (data) {#}
+            {#        alert(data)#}
+
+        });
+
+    {% endif %}
+</script>
+
+<script src="http://cdn.bootcss.com/wangeditor/2.1.20/js/wangEditor.js"></script>
+<link href="http://cdn.bootcss.com/wangeditor/2.1.20/css/wangEditor.css" rel="stylesheet">
+<style>
+    .clearfix {
+        top: 0 !important;
+        position: relative !important;
+    }
+
+    body {
+        margin-top: 0 !important;
+    }
+
+    #txtdiv {
+        border: none !important;
+    }
+</style>
+</html>

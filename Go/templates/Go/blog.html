@@ -1,0 +1,152 @@
+{% extends 'Go/index.html' %}
+
+{% block header %}
+    <div class=" div23" style="background: url(../../static/img/gaolei.jpg) 0 -300px">
+        <div class="div22">
+            <a href="/" class="" data-toggle="tooltip" data-placement="right" title="回首页"
+               data-original-title="Tooltip on right">
+                <img class="img4" src="../../static/img/title.png" alt="">
+            </a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="logotxt div21">
+                        <h1 class="h13">{{ use.username }}
+                            <h4 class="h31">
+                                个人博客
+                            </h4>
+                        </h1>
+                    </div>
+                    {#                    <h2 class="site-name text-center">优站精选<span>www.YouZhan.org</span></h2>#}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock header %}
+
+{% block body %}
+    <div class="container">
+        <div class="rom col-sm-12 ">
+            <div class="div14">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <ul class="ul16">
+                            <li><img class="img_avatar" src="/{{ use.avatar }}" alt=""></li>
+                            <li>姓名：{{ use.last_name }}</li>
+                            <li>粉丝:</li>
+                            <li>关注:{{ fans }}</li>
+                            <li>Email:{{ use.email }}</li>
+                            <li>注册时间:{{ use.date_joined }}</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-primary col-sm-12  div13">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">分类</h3>
+                    </div>
+
+                    <ul class="list-group ul19">
+                        {% for i in a %}
+
+                            <a class="list-group-item classa" title="{{ use.username }}" name="{{ i.0 }}">
+                                {{ i.0 }}
+
+                                <span class="badge">{{ i.1 }}</span>
+
+                            </a>
+
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="panel panel-info col-sm-12 div13">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+
+                    <ul class="list-group">
+                        <li>
+                        <a class="list-group-item">
+
+                            <span class="badge">14</span>
+                            Cras justo odio
+
+                        </a>
+                        <a class="list-group-item">
+                            <span class="badge">2</span>
+                            Dapibus ac facilisis in
+                        </a>
+                        <a class="list-group-item">
+                            <span class="badge">1</span>
+                            Morbi leo risus
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="panel panel-success col-sm-12 div13">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <ul class="list-group">
+                        <li>
+                        <a class="list-group-item">
+
+                            <span class="badge">14</span>
+                            Cras justo odio
+
+                        </a>
+                        <a class="list-group-item">
+                            <span class="badge">2</span>
+
+                        </a>
+                        <a class="list-group-item">
+                            <span class="badge">1</span>
+                            Morbi leo risus
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% block ul %}
+                <ul class="div15">
+                    {% for i in ariticle_list %}
+                        <li>
+                            <div class="media">
+                                <div class="media-body h4_color">
+                                    <h4 class="media-heading h5_color"><a
+                                            href="/{{ i.user.username }}/article/{{ i.pk }}"
+                                            class="a2">{{ i.title }}</a></h4>
+                                    <a href="/{{ i.user.username }}/article/{{ i.pk }}"
+                                       class="a1" >{{ i.article_describe }}</a>
+                                    <div class="div16">
+                                        <span style="display: none"><a href="blog/{{ i.user.username }} ">{{ i.user.username }}</a></span>
+
+                                        <span>发布于：{{ i.create_time }}</span>
+                                        <span>阅读数：</span>
+                                        <span>评论数：{{ i.comment_count }}</span>
+                                        <span class="glyphicon glyphicon-thumbs-up up_span vote" data-toggle="modal"
+                                        >赞({{ i.up_count }})  </span>
+                                        <span class="glyphicon glyphicon-thumbs-down down_span vote" data-toggle="modal"
+                                        >踩({{ i.down_count }}) </span>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <hr>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endblock ul %}
+    </div>
+    </div>
+
+
+{% endblock body %}

@@ -1,0 +1,94 @@
+{% extends 'Go/index.html' %}
+
+{% block body %}
+    {% csrf_token %}
+<div class="div_body">
+    <form class="form-horizontal col-md-offset-3 form2" >
+        <div class="form-group">
+            <label for="inputEmail1" class="col-sm-2 control-label">昵称</label>
+            <div class="col-sm-5">
+{#                <input name="name1" type="text" class="form-control  input1" id="inputEmail1" placeholder="昵称：">#}
+                    {{ myform.name1 }}
+                    <span>{{ myform.errors.name1.0 }}</span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputEmail2" class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-5">
+{#                <input name="name2" type="text" class="form-control  input1" id="inputEmail2" placeholder="姓名：">#}
+                    {{ myform.name2 }}
+                    <span>{{ myform.errors.name2.0 }}</span>
+            </div>
+        </div>
+        
+        <div class="form-group" >
+            <label for="inputEmail3" class="col-sm-2 control-label">电话</label>
+            <div class="col-sm-5">
+{#                <input name="phone" type="text" class="form-control input1" id="inputEmail3" placeholder="电话：">#}
+                    {{ myform.phone }}
+                    <span>{{ myform.errors.phone.0 }}</span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputEmail6" class="col-sm-2 control-label">电子邮件</label>
+            <div class="col-sm-5">
+                {{ myform.email }}
+                <span>{{ myform.errors.email.0 }}</span>
+{#                <input name="email" type="text" class="form-control input1" id="inputEmail6" placeholder="请输入Email：">#}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail4" class="col-sm-2 control-label ">密码</label>
+            <div class="col-sm-5">
+                {{ myform.password }}
+                <span>{{ myform.errors.password.0 }}</span>
+{#                <input name="code" type="text" class="form-control input1" id="inputEmail4" placeholder="请输入密码：">#}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputPassword5" class="col-sm-2 control-label">确认密码</label>
+            <div class="col-sm-5">
+                {{ myform.password_code }}
+                    <span>{{ muform.errors.password_code.0 }}</span>
+{#                <input name="code2" type="password" class="form-control input1" id="inputPassword5" placeholder="请再次输入密码：">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword6" class="col-sm-2 control-label">头像</label>
+
+            <div class="col-sm-5">
+                <img src="/static/img/default.jpg" class="img2" alt="">
+                <input name="code2"  class="form-control input2" id="inputPassword6" type="file">
+{#                <input name="code2" type="password" class="form-control input1" id="inputPassword6" placeholder="请再次输入密码：">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">验证码</label>
+            <div class="col-sm-5">
+                <div class="row">
+                    <div class="col-sm-6">
+{#                        <input name="verification" type="password" class="form-control input1" id="inputPassword" placeholder="请输入验证码：">#}
+                            {{ myform.verification }}
+                            <span>{{ my.verification.0 }}</span>
+                    </div>
+                    <div class="col-sm-6 div2">
+                        <img src="/img" alt="" class="img1">
+                        <span class="span1">看不清</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="button" class="btn btn-success input5" value="确认">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}
+{% block bottom %}
+{% endblock bottom %}

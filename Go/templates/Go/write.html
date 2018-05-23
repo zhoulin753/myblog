@@ -1,0 +1,37 @@
+{% extends 'Go/blog.html' %}
+{% block ul %}
+<div style="position: relative;overflow: hidden ">
+ <script src="http://cdn.bootcss.com/wangeditor/2.1.20/js/lib/jquery-2.2.1.js"></script>
+     <div class="row">
+    <div class="col-md-9 ">
+    <div class="input-group">
+      <input type="text" class="form-control input-lg input3 " placeholder="请输入标题">
+    </div>
+  </div>
+</div>
+
+    <div style="max-width:700px;margin:20px 50px">
+           <div id="txtdiv" style="border:1px solid gray;min-height:240px">
+          </div>
+        </div>
+
+<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+  Loading state
+</button>
+
+
+
+  </div>
+<script>
+             $(function(){
+              editor = new wangEditor("txtdiv");
+                editor.create();
+                editor.onchange = function(){
+                    var html = editor.$txt.html();
+                   $("#show_box").html(html)
+                }
+             })
+       </script>
+{% endblock ul %}
+{% block modal %}
+{% endblock modal %}
