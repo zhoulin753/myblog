@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 #laisadfsadfsadfdsfa
-#addf22222222
+#addf111111
 #issue1 test 冲突
 # from django.http import JsonResponse
 from django.contrib.auth import login, logout, authenticate
